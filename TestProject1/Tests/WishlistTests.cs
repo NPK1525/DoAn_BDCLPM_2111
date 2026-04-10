@@ -12,11 +12,11 @@ using TestProject1.Utilities;
 namespace TestProject1.Tests
 {
     // ============================================================
-    // F7.1 & F7.2 — Thêm / Xóa sản phẩm yêu thích
+    // F7 — Danh sách yêu thích (CRUD, Filter, Sort, UI)
     // ============================================================
     [TestFixture]
     [Category("F7_Wishlist")]
-    public class F7_1_WishlistCRUDTests : BaseTest
+    public class WishlistTests : BaseTest
     {
         private IWebDriver Driver => driver!;
         private WishlistPage _wishlist = null!;
@@ -35,6 +35,27 @@ namespace TestProject1.Tests
             
             _wishlist = new WishlistPage(Driver);
         }
+
+        /// <summary>Đảm bảo có ít nhất 1 SP trong wishlist</summary>
+        private void EnsureWishlistHasProducts()
+        {
+            _wishlist.NavigateTo();
+            System.Threading.Thread.Sleep(1000);
+            if (_wishlist.GetProductCount() == 0)
+            {
+                var home = new HomePage(Driver);
+                home.NavigateTo();
+                System.Threading.Thread.Sleep(1000);
+                home.ClickFirstProduct();
+                System.Threading.Thread.Sleep(1000);
+                _wishlist.AddProductToWishlistFromDetails();
+                System.Threading.Thread.Sleep(1000);
+            }
+        }
+
+        // ============================================================
+        // F7.1 & F7.2 — Thêm / Xóa sản phẩm yêu thích
+        // ============================================================
 
         [Test, Description("TC_F7.1_01 - Kiểm tra thêm sản phẩm vào danh sách yêu thích")]
         public void TC_F7_1_01_AddToWishlist()
@@ -84,49 +105,10 @@ namespace TestProject1.Tests
             int after = _wishlist.GetProductCount();
             Assert.That(after, Is.LessThan(before), "Sản phẩm chưa bị xóa khỏi danh sách yêu thích");
         }
-    }
 
-    // ============================================================
-    // F7.3 — Hiển thị, Tìm kiếm, Lọc, Sắp xếp danh sách yêu thích
-    // ============================================================
-    [TestFixture]
-    [Category("F7_Wishlist")]
-    public class F7_3_WishlistFilterTests : BaseTest
-    {
-        private IWebDriver Driver => driver!;
-        private WishlistPage _wishlist = null!;
-
-        [SetUp]
-        public override void Setup()
-        {
-            driver = DriverFactory.InitDriver();
-            
-            // Đăng nhập với tài khoản user
-            var login = new LoginPage(Driver);
-            Driver.Navigate().GoToUrl("https://shop-production-b6d0.up.railway.app/Account/Login");
-            var user = ConfigReader.GetUserData("user");
-            login.Login(user.Username, user.Password);
-            System.Threading.Thread.Sleep(2000);
-            
-            _wishlist = new WishlistPage(Driver);
-        }
-
-        /// <summary>Đảm bảo có ít nhất 1 SP trong wishlist</summary>
-        private void EnsureWishlistHasProducts()
-        {
-            _wishlist.NavigateTo();
-            System.Threading.Thread.Sleep(1000);
-            if (_wishlist.GetProductCount() == 0)
-            {
-                var home = new HomePage(Driver);
-                home.NavigateTo();
-                System.Threading.Thread.Sleep(1000);
-                home.ClickFirstProduct();
-                System.Threading.Thread.Sleep(1000);
-                _wishlist.AddProductToWishlistFromDetails();
-                System.Threading.Thread.Sleep(1000);
-            }
-        }
+        // ============================================================
+        // F7.3 — Hiển thị, Tìm kiếm, Lọc, Sắp xếp danh sách yêu thích
+        // ============================================================
 
         [Test, Description("TC_F7.3_01 - Kiểm tra hiển thị danh sách sản phẩm yêu thích")]
         public void TC_F7_3_01_DisplayWishlist()
@@ -338,32 +320,10 @@ namespace TestProject1.Tests
             Assert.That(noResult, Is.True,
                 "Không hiển thị thông báo khi không có kết quả phù hợp");
         }
-    }
 
-    // ============================================================
-    // F7.4 — Giao diện Wishlist
-    // ============================================================
-    [TestFixture]
-    [Category("F7_Wishlist")]
-    public class F7_4_WishlistUITests : BaseTest
-    {
-        private IWebDriver Driver => driver!;
-        private WishlistPage _wishlist = null!;
-
-        [SetUp]
-        public override void Setup()
-        {
-            driver = DriverFactory.InitDriver();
-            
-            // Đăng nhập với tài khoản user
-            var login = new LoginPage(Driver);
-            Driver.Navigate().GoToUrl("https://shop-production-b6d0.up.railway.app/Account/Login");
-            var user = ConfigReader.GetUserData("user");
-            login.Login(user.Username, user.Password);
-            System.Threading.Thread.Sleep(2000);
-            
-            _wishlist = new WishlistPage(Driver);
-        }
+        // ============================================================
+        // F7.4 — Giao diện Wishlist
+        // ============================================================
 
         [Test, Description("TC_F7.4_02 - Kiểm tra giao diện wishlist khi không có sản phẩm")]
         public void TC_F7_4_02_EmptyWishlistUI()
