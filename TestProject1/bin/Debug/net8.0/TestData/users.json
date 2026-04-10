@@ -1,0 +1,14 @@
+{
+  "admin": {
+    "username": "gamer957ola@gmail.com",
+    "password": "Khang@123"
+  },
+  "user": {
+    "username": "shopclothing1525@gmail.com",
+    "password": "Test@123"
+  },
+  "empty_user": {
+    "username": "test_empty_user_001@gmail.com",
+    "password": "Password@123"
+  }
+}
