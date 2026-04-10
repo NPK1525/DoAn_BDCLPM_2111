@@ -3,6 +3,10 @@
   "WorkspaceRootPath": "D:\\BDCLPM_LT\\TestProject1\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D7A20448-C1B7-42EF-B296-EC47F796FACD}|TestProject1\\TestProject1.csproj|d:\\bdclpm_lt\\testproject1\\testproject1\\pages\\cartpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D7A20448-C1B7-42EF-B296-EC47F796FACD}|TestProject1\\TestProject1.csproj|solutionrelative:testproject1\\pages\\cartpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D7A20448-C1B7-42EF-B296-EC47F796FACD}|TestProject1\\TestProject1.csproj|d:\\bdclpm_lt\\testproject1\\testproject1\\pages\\registerpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D7A20448-C1B7-42EF-B296-EC47F796FACD}|TestProject1\\TestProject1.csproj|solutionrelative:testproject1\\pages\\registerpage.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
@@ -31,6 +35,19 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
+              "Title": "CartPage.cs",
+              "DocumentMoniker": "D:\\BDCLPM_LT\\TestProject1\\TestProject1\\Pages\\CartPage.cs",
+              "RelativeDocumentMoniker": "TestProject1\\Pages\\CartPage.cs",
+              "ToolTip": "D:\\BDCLPM_LT\\TestProject1\\TestProject1\\Pages\\CartPage.cs",
+              "RelativeToolTip": "TestProject1\\Pages\\CartPage.cs",
+              "ViewState": "AgIAAGwAAAAAAAAAAAAiwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-10T09:00:56.209Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
               "Title": "RegisterPage.cs",
               "DocumentMoniker": "D:\\BDCLPM_LT\\TestProject1\\TestProject1\\Pages\\RegisterPage.cs",
               "RelativeDocumentMoniker": "TestProject1\\Pages\\RegisterPage.cs",

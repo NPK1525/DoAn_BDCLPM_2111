@@ -256,5 +256,71 @@ namespace TestProject1.Tests
             // Thực tế tuỳ hệ thống, kiểm tra URL
             Console.WriteLine("URL sau khi submit: " + Driver.Url);
         }
-    }
-}
+
+        [Test, Order(13), Description("TC_F5_3_04: Tên không hợp lệ (ký tự đặc biệt)")]
+        public void TC_F5_3_04_InvalidNameSpecialChars()
+        {
+            LoginAndGoToCheckout();
+            
+            var checkout = new CheckoutPage(Driver);
+            checkout.SelectAddress();
+            checkout.EnterAddress("123 Test Selenium");
+            
+            // Nhập tên với ký tự đặc biệt
+            bool nameFieldExists = false;
+            try
+            {
+                var nameInput = Driver.FindElement(By.Id("fullName"));
+                nameInput.Clear();
+                nameInput.SendKeys("@@###");
+                nameFieldExists = true;
+            }
+            catch (NoSuchElementException) 
+            { 
+                Console.WriteLine("Không có field fullName");
+            }
+            
+            checkout.ClickSubmitOrder();
+            Thread.Sleep(1000);
+            
+            if (!nameFieldExists)
+            {
+                Assert.Inconclusive("Không có field fullName trên giao diện – bỏ qua");
+            }
+            else
+            {
+                Assert.That(Driver.Url, Does.Not.Contain("OrderSuccess"), 
+                    "Cho phép thanh toán với tên chứa ký tự đặc biệt");
+            }
+        }
+
+        [Test, Order(14), Description("TC_F5_3_05: SĐT chứa chữ cái")]
+        public void TC_F5_3_05_PhoneWithLetters()
+        {
+            LoginAndGoToCheckout();
+            
+            var checkout = new CheckoutPage(Driver);
+            checkout.SelectAddress();
+            checkout.EnterAddress("123 Test Selenium");
+            
+            bool phoneFieldExists = false;
+            try
+            {
+                checkout.EnterPhoneNumber("abcxyz");
+                phoneFieldExists = true;
+            }
+            catch (WebDriverTimeoutException)
+            {
+                Console.WriteLine("Không tìm thấy field phoneNumber");
+            }
+            
+            checkout.ClickSubmitOrder();
+            Thread.Sleep(1000);
+            
+            if (!phoneFieldExists)
+            {
+                Assert.Inconclusive("Giao diện không có field số điện thoại – bỏ qua");
+            }
+            else
+            {
+                Assert.That(Driver.Url, D
